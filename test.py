@@ -1,3 +1,14 @@
+import os
+import discord 
+from discord.ext import commands
+import subprocess
+import requests
+import pyautogui
+
+
+#######################
+
+
 
 @bot.event
 async def on_ready():
