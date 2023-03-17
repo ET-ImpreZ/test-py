@@ -18,3 +18,7 @@ All commands:
 `{prefix}batinjector <JUSTIFICATION>` : insert code Batch on the user PC.
 `{prefix}vbsinjector <JUSTIFICATION>` : insert code VBS on the user PC.
 `{prefix}screenshot` : Get a screenshot of the user PC.
+`{prefix}ufile <Name ARCHIVE>` : Upload a user file 
+(Maximum weight 8mb on v1 servers, if your server is v2 you can 50mb or v3 with 100mb)
+`{prefix}dfile <URL ARCHIVE> <PATH WHERE IT WILL BE SAVED>` : Download a file to the user PC
+`{prefix}cd <Route>` : Navigate through the user PC folders
