@@ -6,4 +6,7 @@ import requests
 import pyautogui
 
 
+#######################
 
+prefix = '$'
+token = 'TOKEN'
