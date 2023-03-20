@@ -29,7 +29,7 @@ All commands:
 @bot.event
 async def on_ready():
     print(f'{bot.user} ON!')
-# Comandos:
+# commands:
 
 @bot.command()
 async def ayuda(message):
